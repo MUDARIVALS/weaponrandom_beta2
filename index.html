@@ -19,6 +19,7 @@
             position: relative;
         }
 
+        /* 워터마크 텍스트 수정 부분 */
         .watermark {
             position: absolute;
             top: 15px;
@@ -217,7 +218,7 @@
 </head>
 <body>
 
-<div class="watermark">@세계테마무기</div>
+<div class="watermark">@무다</div>
 
 <div class="container">
     <h1>⚔️ 나라별 세계 테마 무기조합</h1>
@@ -266,7 +267,6 @@ function playNormalEndSound() {
     playTickSound(587.33, 'triangle', 0.15);
 }
 
-// 무기 데이터 풀
 const weaponsData = {
     main: ["돌격소총", "활", "점사소총", "석궁", "건블레이드", "RPG", "산탄총", "저격소총", "에너지 소총", "화염방사기", "유탄발사기", "미니건", "페인트볼 총", "중력장 생성기", "만년서리", "총검", "얼음광선"],
     sub: ["권총", "투척용 쌍단검", "플레어건", "리볼버", "쇼티", "스프레이", "우지", "에너지 쌍권총", "엑소건", "새총", "초공간 생성기"],
@@ -274,7 +274,6 @@ const weaponsData = {
     utility: ["수류탄", "섬광탄", "얼음 광선총", "점프 패드", "화염병", "가방 폭탄", "연막탄", "뿔피리", "구급상자", "아공간 지뢰", "워프스톤", "그래플러", "C4"]
 };
 
-// 국가 리스트 풀
 const worldCountries = [
     "🇺🇸 미국", "🇯🇵 일본", "🇨🇳 중국", "🇷🇺 러시아", "🇬🇧 영국", "🇩🇪 독일", "🇫🇷 프랑스", "🇨🇦 캐나다", "🇦🇺 호주", "🇧🇷 브라질", 
     "🇮🇹 이탈리아", "🇪🇸 스페인", "🇮🇳 인도", "🇻🇳 베트남", "🇹🇭 태국", "🇹🇷 튀르키예", "🇲🇽 멕시코", "🇪🇬 이집트", "🇸🇦 사우디아라비아", "🇿🇦 남아프리카 공화국", 
@@ -314,7 +313,6 @@ function startRoulette() {
 
         if (elapsed >= duration) {
             
-            // 🚨 4. 스케당첨! (0.005% 극한 확률 유지)
             const jackpotRand = Math.random();
             if (jackpotRand < 0.00005) { 
                 playWinSound();
@@ -332,11 +330,9 @@ function startRoulette() {
                 return; 
             }
 
-            // 최종 확률 분기 연산 (특수 조합을 기존 10% -> 13%로 상향 조절)
             const finalRand = Math.random();
             
             if (finalRand < 0.13) { 
-                // 1. 보너스 (13%)
                 playWinSound();
                 resultBox.innerHTML = `
                     <div class="country-name" style="color: #4ed9ff;">🎁 BONUS (보너스)</div>
@@ -348,7 +344,6 @@ function startRoulette() {
                     </div>
                 `;
             } else if (finalRand < 0.26) {
-                // 2. 얼음조합 (13%)
                 playWinSound();
                 resultBox.innerHTML = `
                     <div class="country-name ice-title">❄️ 얼음조합</div>
@@ -375,7 +370,6 @@ function startRoulette() {
                     </div>
                 `;
             } else if (finalRand < 0.39) {
-                // 3. 불조합 (13%)
                 playWinSound();
                 resultBox.innerHTML = `
                     <div class="country-name fire-title">🔥 불조합</div>
@@ -402,7 +396,6 @@ function startRoulette() {
                     </div>
                 `;
             } else if (finalRand < 0.52) {
-                // 5. 총검조합 (13%)
                 playNormalEndSound();
                 resultBox.innerHTML = `
                     <div class="country-name" style="color: #cbd5e1;">🗡️ 총검조합</div>
@@ -429,7 +422,6 @@ function startRoulette() {
                     </div>
                 `;
             } else {
-                // 일반 국가 랜덤 매칭 분기 (기존 60% -> 48%로 조정됨)
                 playNormalEndSound(); 
                 const finalCountry = worldCountries[Math.floor(Math.random() * worldCountries.length)];
                 
